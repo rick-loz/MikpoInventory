@@ -1,0 +1,70 @@
+.action-bar {
+    background-color: rgb(79, 79, 255);
+}
+
+.error {
+    color: rgb(255, 61, 61);
+    text-align: center;
+    font-weight: bold;
+}
+
+.less {
+    background-color: rgb(134, 134, 255);
+}
+
+.listView {
+    border-bottom-width: 1;
+    background-color: rgb(203, 242, 255);
+}
+
+.more {
+    background-color: rgb(71, 71, 255);
+}
+
+.itemInfo {
+    padding-left: 10;
+}
+
+.itemName {
+    font-weight: bold;
+}
+
+.itemSelected {
+    font-weight: bold;
+    color: rgb(43, 43, 43);
+    padding-left: 5;
+}
+
+.selected {
+    margin-top: 5; 
+}
+
+.sold {
+    background-color: rgb(46, 255, 158);
+}
+
+.total {
+    padding-left: 5;
+    font-weight: bold;
+    color: rgb(43, 43, 43);
+}
+
+.undo {
+    background-color: rgb(255, 61, 61);
+}
+
+StackLayout.items {
+    border-width: 1;
+    border-color: gray;
+    border-radius: 10;
+    margin: 2;
+    padding-bottom: 5;
+    background-color: rgb(108, 108, 253);
+    color: rgb(43, 43, 43);
+    android-elevation:10;
+}
+
+StackLayout.items Image {
+    border-top-left-radius: 10;
+    border-top-right-radius: 10;
+}

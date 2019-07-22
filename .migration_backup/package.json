@@ -1,0 +1,24 @@
+{
+  "nativescript": {
+    "id": "org.nativescript.Inventario",
+    "tns-ios": {
+      "version": "5.4.2"
+    },
+    "tns-android": {
+      "version": "5.4.0"
+    }
+  },
+  "description": "NativeScript Application",
+  "license": "SEE LICENSE IN <your-license-filename>",
+  "repository": "<fill-your-repository-here>",
+  "dependencies": {
+    "nativescript-theme-core": "~1.0.4",
+    "nativescript-ui-listview": "^7.0.1",
+    "tns-core-modules": "~5.4.0"
+  },
+  "devDependencies": {
+    "nativescript-dev-webpack": "~0.24.0"
+  },
+  "gitHead": "8c1a4866a66daab09bf5ef8e5a96472687192373",
+  "readme": "NativeScript Application"
+}
