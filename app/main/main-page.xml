@@ -1,0 +1,87 @@
+<!--
+The markup in NativeScript apps contains a series of user interface components, each
+of which NativeScript renders with a platform-specific iOS or Android native control.
+You can find a full list of user interface components you can use in your app at
+https://docs.nativescript.org/ui/components.
+-->
+<Page xmlns:lv="nativescript-ui-listview" xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page">
+    <!--
+    The ActionBar is the NativeScript common abstraction over the Android ActionBar and iOS NavigationBar.
+    http://docs.nativescript.org/ui/action-bar
+    -->
+    <Page.actionBar>
+        <ActionBar title="Inventario" icon="" class="action-bar">
+        </ActionBar>
+    </Page.actionBar>
+    <!--
+    The StackLayout stacks UI components on the screen—either vertically or horizontally.
+    In this case, the StackLayout does vertical stacking; you can change the stacking to
+    horizontal by applying a orientation="horizontal" attribute to the <StackLayout> element.
+    You can learn more about NativeScript layouts at
+    https://docs.nativescript.org/ui/layout-containers.
+
+    These components make use of several CSS class names that are part of the NativeScript
+    core theme, such as p-20, btn, h2, and text-center. You can view a full list of the
+    class names available for styling your app at https://docs.nativescript.org/ui/theme.
+    -->
+    <TabView>
+        <TabViewItem title="Main">
+            <StackLayout>
+                <lv:RadListView id="itemsView" class="listView" items="{{ items }}" itemTap="onItemTap" height="70%">
+                    <lv:RadListView.listViewLayout>
+                        <lv:ListViewGridLayout scrollDirection="Vertical" spanCount="2" />
+                    </lv:RadListView.listViewLayout>
+                    <lv:RadListView.itemTemplate>
+                        <StackLayout orientation="vertical" class="listItems">
+                            <Image src="{{ 'res://' + img }}" height="180" stretch="aspectFill"/>
+                            <Label fontSize="20"  fontWeight="bold" text="{{ name }}" class="itemInfo" />
+                            <Label fontSize="14" text="{{ 'Stock: ' + quantity + '/' + maxQuantity}}" class="itemInfo"/>
+                            <Label fontSize="14" text="{{ 'Price: $' + price }}" class="itemInfo"/>
+                        </StackLayout>
+                    </lv:RadListView.itemTemplate>
+                </lv:RadListView>
+                <GridLayout  rows="*,*,2*,2*,*" columns="2*,*,2*" height="30%" style="margin-top: 5;">
+                    <Label fontSize="17" fontWeight="bold" text="{{ 'Item selected: ' + currName }}" colSpan="3" class="itemSelected"/>
+                    <Label fontSize="17" fontWeight="bold" text="{{ 'Total Price: $' + currPrice }}" row="1" colSpan="3" class="itemSelected"/>
+                    <Button text="-" tap="onQuantityTap" row="2" col="0" class="less-button"/>
+                    <TextField id="selectedQuantity" hint="Enter Quantity..." text="{{ currQuantity  }}" autocorrect="false" keyboardType="number" returnKeyType="next" row="2" col="1"/>
+                    <Button text="+" tap="onQuantityTap" row="2" col="2" class="more-button"/>
+                    <Button text="Add to Cart" tap="onCartTap" row="3" colSpan="3" class="red-button"/>
+                    <Label fontSize="15" text="{{ errorMessage }}" row="4" colSpan="3" class="error-text"/>
+                </GridLayout> 
+            </StackLayout>
+        </TabViewItem>
+        <TabViewItem title="cart">
+            <StackLayout>
+                <lv:RadListView id="cartView" class="listView" style="background-color: lightgray;" items="{{ cart }}" height="70%">
+                    <lv:RadListView.listViewLayout>
+                        <lv:ListViewLinearLayout  scrollDirection="Vertical" spanCount="1" />
+                    </lv:RadListView.listViewLayout>
+                    <lv:RadListView.itemTemplate>
+                        <StackLayout orientation="vertical" class="listItems" style="background-color: rgb(214, 239, 255);">
+                            <Label fontSize="20"  fontWeight="bold" text="{{ 'Product: ' + name }}" class="itemInfo" />
+                            <Label fontSize="14" text="{{ 'Quantity: ' + quantity}}" class="itemInfo"/>
+                            <Label fontSize="14" text="{{ 'Price: $' + price }}" class="itemInfo"/>
+                            <Button text="Delete" tap="onCartDeleteItem" class="red-button" width="95%"/>
+                        </StackLayout>
+                    </lv:RadListView.itemTemplate>
+                </lv:RadListView>
+                <Label fontSize="20" fontWeight="bold" text="{{ 'Cart Total: $' + cartTotal }}" padding="10 0 0 5" height="10%"/>
+                <Button text="Sell" tap="onSoldTap" class="green-button" height="auto"/>
+                <Button text="Delete All" tap="onCartDelete" class="red-button"/> 
+            </StackLayout>
+        </TabViewItem>
+        <TabViewItem title="Inventory">
+            <StackLayout>
+                <ListView height="85%" items="{{ items }}" itemTap="onEditItemTap" class="listView" style="background-color: white;">
+                    <ListView.itemTemplate>
+                        <Label fontSize="20" text="{{ name }}" padding="10"/>
+                    </ListView.itemTemplate>
+                </ListView>
+                <GridLayout>
+                <Button text="Add New" tap="onNewItemTap" class="green-button" style="vertical-align: middle"/>
+                </GridLayout> 
+            </StackLayout>
+        </TabViewItem>
+    </TabView>
+</Page>

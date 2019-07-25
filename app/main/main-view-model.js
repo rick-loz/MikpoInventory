@@ -5,6 +5,8 @@ const appSettings = require("tns-core-modules/application-settings");
 function createViewModel() {
     const viewModel = new Observable();
 
+    /* ------------------------ MAIN ------------------------*/
+
     const itemsStored = appSettings.getString("items", "");
 
     if(itemsStored !== "") {
@@ -87,7 +89,46 @@ function createViewModel() {
             ];
     }
     
+    //Information of the current item selected
+    viewModel.currName = "";
+    viewModel.currQuantity = 0;
+    viewModel.currPrice = 0;
+    viewModel.currIndex = -1;
 
+ 
+    /* ------------------------ CART  ------------------------*/
+    const cartStored = appSettings.getString("cart", "");
+    if(cartStored !== "") {
+        viewModel.cart = JSON.parse(cartStored);
+    }
+    else {
+        viewModel.cart = [];
+    }
+
+    // Calculating total price of cart
+    var ct = 0;
+    for(var item in viewModel.cart) {
+        ct += item.price;
+    }
+    viewModel.cartTotal = ct;
+
+    const cartLength = viewModel.cart.length;
+    var lastId = 0;
+    if(cartLength > 0) {
+        lastId = viewModel.cart[cartLength - 1].id + 1;
+    }
+    viewModel.cartLastId = lastId;
+
+
+    //Information of last purchase (for Undo)
+    viewModel.lastPurchase = {
+        index: -1,
+        quantity: 0,
+        priceSold: 0
+    }
+
+
+    /* ------------------------ STATISTICS ------------------------*/
     const salesStored = appSettings.getNumber("sales", -1);
     if(salesStored != -1) {
         viewModel.totalSales = Math.round(salesStored * 100) / 100;
@@ -104,38 +145,7 @@ function createViewModel() {
         viewModel.totalTransactions = 0;
     }
 
-    viewModel.promotions = [
-        {
-            description: "2 Stickers",
-            price: 15,
-            itemIndex: 0,
-            quantity: 2
-        },
-        {
-            description: "2 Sticker XL",
-            price: 35,
-            itemIndex: 1,
-            quantity: 2,
-        },
-        {
-            description: "2 Pin Buttons",
-            price: 25,
-            itemIndex: 6
-        }
-        
-    ]
-
-    //Information of the current item selected
-    viewModel.currName = "";
-    viewModel.currQuantity = 0;
-    viewModel.currPrice = 0;
-    viewModel.currIndex = -1;
-
-    viewModel.lastPurchase = {
-        index: -1,
-        quantity: 0,
-        priceSold: 0
-    }
+    
 
     viewModel.errorMessage = "";
     return viewModel;

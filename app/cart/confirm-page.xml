@@ -1,0 +1,17 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" shownModally="onShownModally">
+    <StackLayout height="350" width="400">
+        <ListView items="{{ cart }}" height="60%" style="border-bottom-width: 1; border-color: gray;">
+            <ListView.itemTemplate>
+                <!-- The item template can only have a single root view container (e.g. GriLayout, StackLayout, etc.) -->
+                <StackLayout class="list-group-item">
+                    <Label fontSize="18" text="{{ 'Product: ' + name }}" textWrap="true" style="font-weight:bold; color: rgb(43, 43, 43); padding: 5 0 2 5;" />
+                    <Label fontSize="15" text="{{ 'Quantity: ' + quantity }}" textWrap="true"  style="padding: 0 0 0 5;"/>
+                    <Label fontSize="15" text="{{ 'Price: $' + price }}" textWrap="true" class="item" style="padding: 0 0 5 5;"/>
+                </StackLayout>
+            </ListView.itemTemplate>
+        </ListView>
+        <Label fontSize="18" text="{{ 'Total: $' + total }}" textWrap="true" class="total" height="10%" style="color: rgb(43, 43, 43); padding: 10 0 0 5; font-weight: bold;"/>
+        <Button text="Confirm Purchase" tap="onConfirmationTap" style="background-color: rgb(109, 255, 109);" height="15%"/>
+        <Button text="Cancel" tap="onCancelTap" style="background-color: rgb(255, 61, 61);" height="15%"/>
+    </StackLayout>
+</Page>

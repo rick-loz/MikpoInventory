@@ -1,0 +1,5 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" shownModally="onShownModally">
+    <StackLayout height="350" width="400">
+        
+    </StackLayout>
+</Page>
